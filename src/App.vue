@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref, reactive, shallowReactive, isReactive, computed } from 'vue'
+import { ref, reactive, shallowReactive, isReactive, computed, watch } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import { setegid } from 'process'
 
 const count = ref(0)
 const object = {
@@ -30,6 +29,26 @@ let fullName = computed<string>({
     ;[firstName.value, lastName.value] = newVal.split(' ')
   }
 })
+
+// 表单输入
+const checked = ref(false)
+const checkedNames = ref([])
+
+// watch
+const question = ref('')
+const answer = ref('Questions usually contain a question mark. ;-)')
+
+watch(question, async (newQuestion) => {
+  if (newQuestion.indexOf('?') > -1) {
+    answer.value = 'Thinking...'
+    try {
+      const res = await fetch('https://yesno.wtf/api')
+      answer.value = (await res.json()).answer
+    } catch (error) {
+      answer.value = 'Error! Could not reach the API. ' + error
+    }
+  }
+})
 </script>
 
 <template>
@@ -47,24 +66,57 @@ let fullName = computed<string>({
   </header>
 
   <RouterView />
-  <hr />
-  <div>
+  <div class="api-block">
+    <h3>ref reactive 解构相关</h3>
     <div>{{ count }}</div>
     <div>{{ object.count.value }}</div>
-    <button @click="increment" style="background: red; height: 30px; width: 100%"></button>
+    <button
+      @click="increment"
+      style="background: rgb(255, 0, 0); height: 30px; width: 100%"
+    ></button>
+    <hr />
   </div>
-  <hr />
-  <div>
+  <div class="api-block">
+    <h3>computed api</h3>
     <p>Has published books:</p>
     <span>{{ publishedBooksMessage }}</span>
+    <hr />
   </div>
-  <hr />
-  <div>
+  <div class="api-block">
+    <h3>computer 调用 get、set 方法</h3>
     {{ fullName }}
+    <hr />
+  </div>
+  <div class="api-block">
+    <div>
+      <h4>单一复选框</h4>
+      <h3>表单输入</h3>
+      <input type="checkbox" id="checkbox" v-model="checked" />
+      <label for="checkbox">{{ checked }}</label>
+    </div>
+    <div>
+      <h4>多个复选框</h4>
+      <div>Checked names: {{ checkedNames }}</div>
+      <input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
+      <label for="jack">Jack</label>
+      <input type="checkbox" id="john" value="John" v-model="checkedNames" />
+      <label for="john">John</label>
+      <input type="checkbox" id="waylon" value="Waylon" v-model="checkedNames" />
+      <label for="waylon">Waylon</label>
+    </div>
+    <hr />
+  </div>
+  <div class="api-block">
+    <h4>watch function</h4>
+    <p>
+      Ask a yes/no question:
+      <input class="color-black" v-model="question" />
+    </p>
+    <p>{{ answer }}</p>
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 header {
   line-height: 1.5;
   max-height: 100vh;
@@ -98,6 +150,18 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
+}
+
+.api {
+  &-block {
+    width: 100%;
+    padding: 10px 0;
+  }
+}
+.color {
+  &-black {
+    color: black;
+  }
 }
 
 @media (min-width: 1024px) {
