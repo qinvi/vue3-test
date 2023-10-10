@@ -49,6 +49,11 @@ watch(question, async (newQuestion) => {
     }
   }
 })
+
+// 子组件触发
+function changeColor(color: string) {
+  console.log(color)
+}
 </script>
 
 <template>
@@ -56,7 +61,7 @@ watch(question, async (newQuestion) => {
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="嘿！！小曾 You did it!" />
+      <HelloWorld @change-color="changeColor" msg="嘿！！小曾 You did it!" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
