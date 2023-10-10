@@ -1,7 +1,17 @@
 <script setup lang="ts">
-defineProps<{
+// 泛型参数定义 props 声明（基于类型的声明
+// 使用 ts 的基于类型的声明比运行时声明更直观，二者不能同时使用
+interface genProps {
   msg: string
-}>()
+}
+defineProps<genProps>()
+
+// 运行时声明 props
+// defineProps({
+//   msg: {
+//     type: String
+//   }
+// })
 </script>
 
 <template>

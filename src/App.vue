@@ -49,22 +49,6 @@ watch(question, async (newQuestion) => {
     }
   }
 })
-
-// 传递 props：ts 语法
-// 运行时定义 props 声明
-// const runTimeProps = defineProps({
-//   foo: {
-//     type: String,
-//     required: true
-//   },
-//   bar: Number
-// })
-// 泛型参数定义 props 声明
-interface GenProps {
-  foo: string
-  bar?: number
-}
-const genProps = defineProps<GenProps>()
 </script>
 
 <template>
@@ -72,7 +56,7 @@ const genProps = defineProps<GenProps>()
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld msg="嘿！！小曾 You did it!" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
