@@ -3,6 +3,8 @@ import { ref, reactive, shallowReactive, isReactive, computed, watch } from 'vue
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import CustomInput from './components/CustomInput.vue'
+import FancyButton from './components/FancyButton.vue'
+import AwesomeIcon from './components/AwesomeIcon.vue'
 
 const count = ref(0)
 const object = {
@@ -72,6 +74,13 @@ let searchText = ref('...')
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
+    </div>
+    <div class="wrapper-slot">
+      <FancyButton>click me</FancyButton>
+      <FancyButton>
+        click me
+        <AwesomeIcon></AwesomeIcon>
+      </FancyButton>
     </div>
   </header>
 
