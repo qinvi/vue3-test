@@ -5,6 +5,7 @@ import HelloWorld from './components/HelloWorld.vue'
 import CustomInput from './components/CustomInput.vue'
 import FancyButton from './components/FancyButton.vue'
 import AwesomeIcon from './components/AwesomeIcon.vue'
+import SlotComponent from './components/SlotComponent.vue'
 
 const count = ref(0)
 const object = {
@@ -81,6 +82,7 @@ let searchText = ref('...')
         click me
         <AwesomeIcon></AwesomeIcon>
       </FancyButton>
+      <SlotComponent v-slot="slots"> {{ slots.text }} - {{ slots.count }} </SlotComponent>
     </div>
   </header>
 
