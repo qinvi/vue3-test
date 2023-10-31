@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useAttrs } from 'vue'
 
 // 自定义组件绑定的 v-model
 const props = defineProps(['modelValue'])
 const emit = defineEmits(['update:modelValue'])
+// js 内部访问 fallthrough
+const attrs = useAttrs()
+console.log(attrs['class'])
 
 // 禁止最外部的 fallthrough
 defineOptions({
