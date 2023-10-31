@@ -66,7 +66,7 @@ let searchText = ref('...')
     <div class="wrapper">
       <!-- 子组件 -->
       <HelloWorld @change-color="changeColor" msg="嘿！！小曾 You did it!" />
-      <CustomInput v-model="searchText" />{{ searchText }}
+      <CustomInput class="fallthrough-class" v-model="searchText" />{{ searchText }}
 
       <nav>
         <RouterLink to="/">Home</RouterLink>

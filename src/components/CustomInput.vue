@@ -5,6 +5,11 @@ import { computed } from 'vue'
 const props = defineProps(['modelValue'])
 const emit = defineEmits(['update:modelValue'])
 
+// 禁止最外部的 fallthrough
+defineOptions({
+  inheritAttrs: false
+})
+
 // 通过 computed 内部的 get、set 方法
 const value = computed({
   get() {
@@ -17,13 +22,16 @@ const value = computed({
 </script>
 
 <template>
-  <input
-    class="block black"
-    :value="modelValue"
-    @input="$emit('update:modelValue', $event.target?.value)"
-  />
-  <!-- computed 实现 v-model -->
-  <input class="black" v-model="value" />
+  <div class="btn-wrapper">
+    <input
+      class="block black"
+      v-bind="$attrs"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target?.value)"
+    />
+    <!-- computed 实现 v-model -->
+    <input class="black" v-model="value" />
+  </div>
 </template>
 
 <style scoped lang="scss">
