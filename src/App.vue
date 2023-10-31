@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, reactive, shallowReactive, isReactive, computed, watch } from 'vue'
+import { ref, reactive, shallowReactive, isReactive, computed, watch, provide } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import CustomInput from './components/CustomInput.vue'
 import FancyButton from './components/FancyButton.vue'
 import AwesomeIcon from './components/AwesomeIcon.vue'
 import SlotComponent from './components/SlotComponent.vue'
+import PropsDrilling from './components/PropsDrilling.vue'
 
 const count = ref(0)
 const object = {
@@ -60,6 +61,19 @@ function changeColor(color: string) {
 }
 // 子组件 CustomInput 相关
 let searchText = ref('...')
+
+// provide
+const location = ref('North Pole')
+
+// provide 提供以在 inject 组件修改 location 值
+function updateLocation(newVal: string) {
+  location.value = newVal
+  console.log(`update provide 上响应数据：${newVal}`)
+}
+provide('location', {
+  location,
+  updateLocation
+})
 </script>
 
 <template>
@@ -83,6 +97,9 @@ let searchText = ref('...')
         <AwesomeIcon></AwesomeIcon>
       </FancyButton>
       <SlotComponent v-slot="slots"> {{ slots.text }} - {{ slots.count }} </SlotComponent>
+    </div>
+    <div class="wrapper-drilling">
+      <PropsDrilling></PropsDrilling>
     </div>
   </header>
 
