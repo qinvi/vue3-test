@@ -2,6 +2,7 @@
 import { ref, reactive, shallowReactive, isReactive, computed, watch } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import CustomInput from './components/CustomInput.vue'
 
 const count = ref(0)
 const object = {
@@ -54,6 +55,8 @@ watch(question, async (newQuestion) => {
 function changeColor(color: string) {
   console.log(color)
 }
+// 子组件 CustomInput 相关
+let searchText = ref('...')
 </script>
 
 <template>
@@ -61,7 +64,9 @@ function changeColor(color: string) {
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
+      <!-- 子组件 -->
       <HelloWorld @change-color="changeColor" msg="嘿！！小曾 You did it!" />
+      <CustomInput v-model="searchText" />{{ searchText }}
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
