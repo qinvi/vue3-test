@@ -1,157 +1,31 @@
 <script setup lang="ts">
-import { ref, reactive, shallowReactive, isReactive, computed, watch, provide } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import CustomInput from './components/CustomInput.vue'
-import FancyButton from './components/FancyButton.vue'
-import AwesomeIcon from './components/AwesomeIcon.vue'
-import SlotComponent from './components/SlotComponent.vue'
-import PropsDrilling from './components/PropsDrilling.vue'
-
-const count = ref(0)
-const object = {
-  count
-}
-function increment() {
-  object.count.value++
-}
-
-const author = reactive({
-  name: 'John Doe',
-  books: ['Vue 2 - Advanced Guide', 'Vue 3 - Basic Guide', 'Vue 4 - The Mystery']
-})
-const publishedBooksMessage = computed(() => {
-  return author.books.length > 0 ? 'Yes' : 'No'
-})
-
-const firstName = ref('qingwei')
-const lastName = ref('zeng')
-let fullName = computed<string>({
-  get() {
-    return `${firstName.value} ${lastName.value}`
-  },
-  set(newVal) {
-    ;[firstName.value, lastName.value] = newVal.split(' ')
-  }
-})
-
-// 表单输入
-const checked = ref(false)
-const checkedNames = ref([])
-
-// watch
-const question = ref('')
-const answer = ref('Questions usually contain a question mark. ;-)')
-
-watch(question, async (newQuestion) => {
-  if (newQuestion.indexOf('?') > -1) {
-    answer.value = 'Thinking...'
-    try {
-      const res = await fetch('https://yesno.wtf/api')
-      answer.value = (await res.json()).answer
-    } catch (error) {
-      answer.value = 'Error! Could not reach the API. ' + error
-    }
-  }
-})
-
-// 子组件触发
-function changeColor(color: string) {
-  console.log(color)
-}
-// 子组件 CustomInput 相关
-let searchText = ref('...')
-
-// provide
-const location = ref('North Pole')
-
-// provide 提供以在 inject 组件修改 location 值
-function updateLocation(newVal: string) {
-  location.value = newVal
-  console.log(`update provide 上响应数据：${newVal}`)
-}
-provide('location', {
-  location,
-  updateLocation
-})
+import routeNames from '@router/routeName'
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" src="@src/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
       <!-- 子组件 -->
-      <HelloWorld @change-color="changeColor" msg="嘿！！小曾 You did it!" />
-      <CustomInput class="fallthrough-class" v-model="searchText" />{{ searchText }}
-
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink :to="`/${routeNames.about}`">About</RouterLink>
+        <RouterLink :to="`/${routeNames.emit}`">Emit</RouterLink>
+        <RouterLink :to="`/${routeNames.fallthrough}`">Fallthrough</RouterLink>
+        <RouterLink :to="`/${routeNames.transition}`">Transition</RouterLink>
+        <RouterLink :to="`/${routeNames.slot}`">Slot</RouterLink>
+        <RouterLink :to="`/${routeNames.propsdrilling}`">PropsDrilling</RouterLink>
+        <RouterLink :to="`/${routeNames.destructure}`">Destructure</RouterLink>
+        <RouterLink :to="`/${routeNames.computed}`">Computed</RouterLink>
+        <RouterLink :to="`/${routeNames.checkbox}`">Checkbox</RouterLink>
+        <RouterLink :to="`/${routeNames.watch}`">Watch</RouterLink>
       </nav>
-    </div>
-    <div class="wrapper-slot">
-      <FancyButton>click me</FancyButton>
-      <FancyButton>
-        click me
-        <AwesomeIcon></AwesomeIcon>
-      </FancyButton>
-      <SlotComponent v-slot="slots"> {{ slots.text }} - {{ slots.count }} </SlotComponent>
-    </div>
-    <div class="wrapper-drilling">
-      <PropsDrilling></PropsDrilling>
     </div>
   </header>
 
   <RouterView />
-  <div class="api-block">
-    <h3>ref reactive 解构相关</h3>
-    <div>{{ count }}</div>
-    <div>{{ object.count.value }}</div>
-    <button
-      @click="increment"
-      style="background: rgb(255, 0, 0); height: 30px; width: 100%"
-    ></button>
-    <hr />
-  </div>
-  <div class="api-block">
-    <h3>computed api</h3>
-    <p>Has published books:</p>
-    <span>{{ publishedBooksMessage }}</span>
-    <hr />
-  </div>
-  <div class="api-block">
-    <h3>computer 调用 get、set 方法</h3>
-    {{ fullName }}
-    <hr />
-  </div>
-  <div class="api-block">
-    <div>
-      <h4>单一复选框</h4>
-      <h3>表单输入</h3>
-      <input type="checkbox" id="checkbox" v-model="checked" />
-      <label for="checkbox">{{ checked }}</label>
-    </div>
-    <div>
-      <h4>多个复选框</h4>
-      <div>Checked names: {{ checkedNames }}</div>
-      <input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
-      <label for="jack">Jack</label>
-      <input type="checkbox" id="john" value="John" v-model="checkedNames" />
-      <label for="john">John</label>
-      <input type="checkbox" id="waylon" value="Waylon" v-model="checkedNames" />
-      <label for="waylon">Waylon</label>
-    </div>
-    <hr />
-  </div>
-  <div class="api-block">
-    <h4>watch function</h4>
-    <p>
-      Ask a yes/no question:
-      <input class="color-black" v-model="question" />
-    </p>
-    <p>{{ answer }}</p>
-  </div>
 </template>
 
 <style scoped lang="scss">
