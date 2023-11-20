@@ -11,7 +11,7 @@ import { inject, type InjectionKey } from 'vue'
 function injectStrict<T>(key: InjectionKey<T>, fallback?: T) {
   const resolved = inject(key, fallback)
   if (!resolved) {
-    throw new Error('hahaha')
+    throw new Error(`could not resolve ${key.description}`)
   }
   return resolved
 }
