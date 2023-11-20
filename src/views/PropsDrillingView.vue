@@ -2,6 +2,7 @@
 import PropsDrilling from '@components/PropsDrilling.vue'
 
 import { ref, provide } from 'vue'
+import { LocationKey } from '@src/symbols'
 
 // provide
 const location = ref('North Pole')
@@ -11,7 +12,7 @@ function updateLocation(newVal: string) {
   location.value = newVal
   console.log(`update provide 上响应数据：${newVal}`)
 }
-provide('location', {
+provide(LocationKey, {
   location,
   updateLocation
 })

@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { inject, computed } from 'vue'
+import { computed } from 'vue'
+import { LocationKey } from '@src/symbols'
+import { injectStrict } from '@src/utils'
 
 // inject 依赖
-const { location, updateLocation } = inject('location')
-console.log(location, updateLocation)
+const { location, updateLocation } = injectStrict(LocationKey)
 const value = computed({
   get() {
     return location.value
