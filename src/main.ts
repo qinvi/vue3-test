@@ -10,5 +10,7 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+// 注册全局组件
+// app.component(name, component)
 
 app.mount('#app')
