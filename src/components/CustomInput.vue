@@ -8,6 +8,10 @@ const emit = defineEmits(['update:modelValue'])
 const attrs = useAttrs()
 console.log(attrs['class'])
 
+const getFallthroughAttr = () => {
+  console.log(attrs)
+}
+
 // 禁止最外部的 fallthrough
 defineOptions({
   inheritAttrs: false
@@ -21,6 +25,10 @@ const value = computed({
   set(newVal) {
     emit('update:modelValue', newVal)
   }
+})
+
+defineExpose({
+  getFallthroughAttr
 })
 </script>
 
