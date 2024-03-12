@@ -10,6 +10,7 @@ import Destructure from '@views/DestructureView.vue'
 import Computed from '@views/ComputedView.vue'
 import Checkbox from '@views/CheckboxView.vue'
 import Watch from '@views/WatchView.vue'
+import ComponentModelView from '@views/ComponentModelView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -71,6 +72,11 @@ const router = createRouter({
       path: `/${routeNames.watch}`,
       name: routeNames.watch,
       component: Watch
+    },
+    {
+      path: `/${routeNames.componentModel}`,
+      name: routeNames.componentModel,
+      component: ComponentModelView
     }
   ]
 })

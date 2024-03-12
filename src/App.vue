@@ -21,6 +21,7 @@ import routeNames from '@router/routeName'
         <RouterLink :to="`/${routeNames.computed}`">Computed</RouterLink>
         <RouterLink :to="`/${routeNames.checkbox}`">Checkbox</RouterLink>
         <RouterLink :to="`/${routeNames.watch}`">Watch</RouterLink>
+        <RouterLink :to="`/${routeNames.componentModel}`">Component v-model</RouterLink>
       </nav>
     </div>
   </header>

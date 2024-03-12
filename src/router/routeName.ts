@@ -10,7 +10,8 @@ const routeNames = {
   destructure: 'destructure',
   computed: 'computed',
   checkbox: 'checkbox',
-  watch: 'watch'
+  watch: 'watch',
+  componentModel: 'componentModel'
 }
 
 export default routeNames

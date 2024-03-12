@@ -16,6 +16,10 @@ export default defineConfig({
         compilerOptions: {
           isCustomElement: (tag) => tag.includes('-')
         }
+      },
+      script: {
+        // vue 3.4 以下的版本默认关闭
+        defineModel: true
       }
     }),
     vueJsx()
