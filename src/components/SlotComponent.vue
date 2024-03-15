@@ -4,6 +4,11 @@ const greetingMessage = 'slotText'
 
 <template>
   <div>
-    <slot :count="1" :text="greetingMessage"></slot>
+    <header>
+      <slot name="header"></slot>
+    </header>
+    <main>
+      <slot :count="1" :text="greetingMessage"></slot>
+    </main>
   </div>
 </template>

@@ -9,6 +9,6 @@ const msg = ref('hello world!!')
   <div>
     <h1>Components v-model</h1>
     <p>{{ msg }}</p>
-    <ChildModel v-model="msg"></ChildModel>
+    <ChildModel v-model.capitalize="msg"></ChildModel>
   </div>
 </template>

@@ -1,6 +1,12 @@
 <script setup lang="ts">
-// import { defineModel } from 'vue'
-const model = defineModel()
+const [model, modifiers] = defineModel<string, {}>({
+  set(value: string) {
+    if (modifiers.capitalize) {
+      return value.charAt(0).toUpperCase() + value.slice(1)
+    }
+    return value
+  }
+})
 </script>
 
 <template>

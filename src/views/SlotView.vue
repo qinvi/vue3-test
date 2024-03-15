@@ -11,7 +11,14 @@ import SlotComponent from '@components/SlotComponent.vue'
       click me
       <AwesomeIcon></AwesomeIcon>
     </FancyButton>
-    <SlotComponent v-slot="slots"> {{ slots.text }} - {{ slots.count }} </SlotComponent>
+    <SlotComponent>
+      <template #default="slotProps">
+        <p>{{ slotProps.text }} - {{ slotProps.count }}</p>
+      </template>
+      <template #header>
+        <h1>这是 header slot 内容</h1>
+      </template>
+    </SlotComponent>
   </div>
 </template>
 
